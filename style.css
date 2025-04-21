@@ -170,6 +170,27 @@ nav .btn-blink:hover {
   align-items: center;
   background-color: #f7f7f7;
 }
+.search__cards {
+  display: none;
+}
+.search__cards.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.search__card img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.search__cards.show {
+  display: block;
+}
 /* }specific styles for the input field within the .search class to ensure it expands properly */
 .search input[type="text"] {
   width: 100%;
