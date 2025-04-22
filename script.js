@@ -70,17 +70,15 @@ filterDOWN.addEventListener("change", (e) => {
   movieList.innerHTML = ""; // Clear the movie list before appending sorted movies
   detailMovie.forEach((movie) => {
     const card = document.createElement("div");
-    card.classList.add("search__cards", "show");
-    const details = movie; // Assuming movie contains the details to display
+    card.classList.add("search__card");
     card.innerHTML = `
       <div class="search__item--container">
-      <img src="${details.Poster}" alt="${details.Title}" class="movie-poster"/>
-        <h3>Title: ${details.Title}</h3>
-        <p><b>Year:</b> ${details.Year}</p>
-        <p><b>Rated:</b> ${details.Rated}</p>
-        <p><b>Plot:</b> ${details.Plot}</p>
+      <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster"/>
+        <h3>Title: ${movie.Title}</h3>
+        <p><b>Year:</b> ${movie.Year}</p>
+        <p><b>Rated:</b> ${movie.Rated}</p>
+        <p><b>Plot:</b> ${movie.Plot}</p>
         </div>
-      </div>
     `;
     movieList.appendChild(card);
   });
