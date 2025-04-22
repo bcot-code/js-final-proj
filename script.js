@@ -1,9 +1,12 @@
 const searchBtn = document.querySelector("#btn-blink");
 const movieList = document.querySelector(".search__list");
 const API_KEY = "f2631148";
+const filterDOWN = document.querySelector("#filter");
 
-async function movieSearch(event) {
-  event.preventDefault();
+let detailMovie = [""]; //store the movie filtered movie details
+
+async function movieSearch(e) {
+  e.preventDefault();
   const searchInput = document.querySelector("input[name='search']");
   const searchTerm = searchInput.value.trim();
 
@@ -20,6 +23,7 @@ async function movieSearch(event) {
     if (data.Response === "True") {
       const sixMovies = data.Search.slice(0, 6);
       movieList.innerHTML = "";
+      detailMovie = []; //search new
 
       for (const movie of sixMovies) {
         const detailRes = await fetch(
@@ -27,12 +31,14 @@ async function movieSearch(event) {
         );
         const details = await detailRes.json();
 
+        detailMovie.push(details); //store the filtering
+
         const card = document.createElement("div");
         card.classList.add("search__cards", "show");
         card.innerHTML = `
           <div class="search__card">
             <div class="search__item--container">
-              <img src="${details.Poster}" alt="${details.Title}" />
+              <img src="${details.Poster}" alt="${details.Title}" class="movie-poster"/>
               <h3>Title: ${details.Title}</h3>
               <p><b>Year:</b> ${details.Year}</p>
               <p><b>Plot:</b> ${details.Plot}</p>
@@ -52,6 +58,33 @@ async function movieSearch(event) {
 }
 
 searchBtn.addEventListener("click", movieSearch);
+
+//Filter down EMOJI 🎬🎥🌟 Handler
+filterDOWN.addEventListener("change", (e) => {
+  const value = e.target.value;
+  if (value === "OLD_TO_NEW") {
+    detailMovie.sort((a, b) => parseInt(a.Year) - parseInt(b.Year));
+  } else if (value === "NEW_TO_OLD") {
+    detailMovie.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+  }
+  movieList.innerHTML = ""; // Clear the movie list before appending sorted movies
+  detailMovie.forEach((movie) => {
+    const card = document.createElement("div");
+    card.classList.add("search__cards", "show");
+    const details = movie; // Assuming movie contains the details to display
+    card.innerHTML = `
+      <div class="search__item--container">
+      <img src="${details.Poster}" alt="${details.Title}" class="movie-poster"/>
+        <h3>Title: ${details.Title}</h3>
+        <p><b>Year:</b> ${details.Year}</p>
+        <p><b>Rated:</b> ${details.Rated}</p>
+        <p><b>Plot:</b> ${details.Plot}</p>
+        </div>
+      </div>
+    `;
+    movieList.appendChild(card);
+  });
+});
 
 // calling this api movie request
 function moveList() {
