@@ -18,24 +18,41 @@
             <img src="./assets/Movie logo.png" class="nav__logo" />
             <!-- Photo by Tima Miroshnichenko from Pexels: https://www.pexels.com/photo/an-empty-cinema-7991486/ -->
           </div>
-          <ul class="nav__links">
-            <li>
-              <a href="#" class="nav__link nav_link--hover nav__link--red"
-                >Home</a
-              >
-            </li>
-            <li id="movie-link">
-              <a
-                href="#"
-                class="nav__link nav_link--hover nav__link--red"
-                onclick=""
-                >FIND A MOVIE</a
-              >
-            </li>
-            <li>
-              <a href="#" class="nav__link btn-blink" onclick="">Contact</a>
-            </li>
-          </ul>
+          <!-- open btn to control the diaolg menu btn using the label NAV For both open and menu -->
+          <span id="nav-label" hidden>Nav</span>
+          <button class="open__btn" id="btnOpen">
+            <img
+              src="./assets/burger-menu-right-svgrepo-com.svg"
+              alt="Delicious burger image"
+              width="50"
+              height="30"
+            />
+          </button>
+          <!-- dialog element allow to see if the element is expanded or open -->
+          <div class="burger__menu" role="dialog" aria-labelledby="nav-label">
+            <button class="close__btn" id="btnClose" aria-label="Close">
+              <img src="/assets/close.svg" alt="" width="28" height="27" />
+            </button>
+            <ul class="nav__links">
+              <li>
+                <a href="#" class="nav__link nav_link--hover nav__link--red"
+                  >Home</a
+                >
+              </li>
+              <li id="movie-link">
+                <a
+                  href="#"
+                  class="nav__link nav_link--hover nav__link--red"
+                  onclick=""
+                  >FIND A MOVIE</a
+                >
+              </li>
+              <li>
+                <a href="#" class="nav__link btn-blink">Contact</a>
+              </li>
+            </ul>
+          </div>
+
           <header>
             <div
               class="flex-column header__container align"
@@ -43,7 +60,7 @@
             >
               <h1>MOVIES</h1>
               <h2>Find your next favorite movie here on Cinema</h2>
-              <form action="" class="search">
+              <form class="search">
                 <input
                   type="text"
                   id="search-input"
