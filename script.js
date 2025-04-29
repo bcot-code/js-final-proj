@@ -84,6 +84,23 @@ filterDOWN.addEventListener("change", (e) => {
   });
 });
 
+// 🍔 Burger Menu Toggle
+document.addEventListener("DOMContentLoaded", () => {
+  const btnOpen = document.querySelector("#btnOpen");
+  const btnClose = document.querySelector("#btnClose");
+  const burgerMenu = document.querySelector(".burger__menu");
+
+  btnOpen.addEventListener("click", () => {
+    burgerMenu.classList.add("open");
+    btnOpen.setAttribute("aria-expanded", "true");
+  });
+
+  btnClose.addEventListener("click", () => {
+    burgerMenu.classList.remove("open");
+    btnOpen.setAttribute("aria-expanded", "false");
+  });
+});
+
 // calling this api movie request
 function moveList() {
   return [
